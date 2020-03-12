@@ -1,0 +1,34 @@
+Views/Booking/Components/BookNow/BookNowViewComponent.cs
+
+    public class BookNowViewComponent : ViewComponent
+    {
+        public async Task<IViewComponentResult> InvokeAsync(int vId)
+        {
+            ViewBag.venueId = vId;
+            return View();
+        }
+    }
+Views/Booking/Components/BookNow/Default.cshtml
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Hello Lets Book Now</h4>
+            </div>
+            <div class="modal-body">
+
+                <form asp-action="BookNow" asp-controller="Booking" method="POST">
+                    .......
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+Details.cshtml
+
+<button type="button" data-toggle="modal" data-target="#myModal">Book Now</button>
+
+@await Component.InvokeAsync("BookNow", new { vId = Model.Venue.Id })
